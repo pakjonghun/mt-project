@@ -42,7 +42,7 @@ export const useGetMovie = () => {
     {
       onSuccess: (data) => {
         checkWarning(data);
-        data.success ?? dispatch(movieSave(data.results));
+        data.results?.length && dispatch(movieSave(data.results));
       },
     }
   );
@@ -59,7 +59,7 @@ export const useGetTV = () => {
     {
       onSuccess: (data) => {
         checkWarning(data);
-        data.success ?? dispatch(tvSave(data.results));
+        data.results?.length && dispatch(tvSave(data.results));
       },
     }
   );

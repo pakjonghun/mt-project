@@ -12,8 +12,8 @@ const Header = () => {
   };
   return (
     //header height-size must pt-size
-    <div className="pt-20 md:pt-24">
-      <header className="fixed top-0 flex item-center justify-between w-full h-20 md:h-24 bg-black">
+    <div className="pt-20 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl">
+      <header className="fixed top-0 flex item-center justify-between w-full h-20 md:h-24 bg-black z-10">
         <List
           styles={style}
           contents={[

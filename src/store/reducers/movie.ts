@@ -25,14 +25,11 @@ const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    carocel: (state, { payload }: PayloadAction<Movie[]>) => {
-      return [...state, ...payload];
-    },
     movieSave: (state, { payload }: PayloadAction<Movie[]>) => {
       return [...state, ...payload];
     },
   },
 });
 
-export const { carocel, movieSave } = movieSlice.actions;
+export const { movieSave } = movieSlice.actions;
 export default movieSlice.reducer;

@@ -10,7 +10,7 @@ const Logo = () => {
     >
       <motion.svg
         whileHover={{ opacity: [1, 0.1, 1] }}
-        className="w-5 text-red-700"
+        className="w-5 md:w-6 lg:w-7 2xl:w-8 text-red-700"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 576 512"
       >

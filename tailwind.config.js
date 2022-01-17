@@ -2,7 +2,9 @@ module.exports = {
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
-      "header-height": "20",
+      height: {
+        "60vh": "60vh",
+      },
     },
   },
   plugins: [],

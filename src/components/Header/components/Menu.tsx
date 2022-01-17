@@ -14,7 +14,7 @@ const Menu: React.FC<MenuProps> = ({ path, title }) => {
   return (
     <Link
       to={path}
-      className="flex flex-col items-center justify-center h-full px-5 text-red-700 font-bold"
+      className="flex flex-col items-center justify-center h-full px-5 text-red-700 font-bold select-none"
     >
       {title}
       <AnimatePresence>
