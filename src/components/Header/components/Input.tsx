@@ -1,15 +1,44 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import ErrorMessage from "../../ErrorMessage";
+
+type SearchForm = {
+  term: string;
+};
 
 const Input = () => {
   const [isSearch, setIsSearch] = React.useState(false);
+  const {
+    setValue,
+    register,
+    setFocus,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm<SearchForm>({ mode: "onChange" });
+
+  const onSubmit = (value: SearchForm) => {
+    console.log(value);
+  };
+
+  const onClick = () => {
+    setIsSearch((pre) => {
+      if (pre) {
+        clearErrors("term");
+        setValue("term", "");
+      }
+      return !pre;
+    });
+    setFocus("term");
+  };
 
   return (
     <div className="relative">
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
-        onClick={() => setIsSearch(!isSearch)}
+        onClick={() => onClick()}
         className={`absolute top-1/2 -translate-y-1/2 ${
           isSearch ? " -translate-x-48" : ""
         } right-3 w-4 text-stone-400 cursor-pointer hover:scale-110 active:scale-100 transition-all duration-190 z-10`}
@@ -20,14 +49,24 @@ const Input = () => {
         />
       </motion.svg>
       <form
-        className={`flex items-center h-full ${
+        onSubmit={handleSubmit(onSubmit)}
+        className={`relative flex items-center h-full ${
           isSearch ? "scale-x-100" : "scale-x-0"
         } transition-all duration-200 origin-right`}
       >
         <input
+          {...register("term", {
+            required: { value: true, message: "Required" },
+          })}
           placeholder="Search For"
           className="w-30 pl-9 pr-3 py-1.5  mr-3 bg-stone-300 text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400 rounded-md"
         />
+        {errors?.term?.message && (
+          <ErrorMessage
+            styles={"absolute left-1 bottom-0 text-red-700"}
+            message={errors.term.message}
+          />
+        )}
       </form>
     </div>
   );
