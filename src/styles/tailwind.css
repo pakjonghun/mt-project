@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 .switchButton {
-  @apply w-20 md:w-24 lg:w-28 py-2 px-3 m-2 bg-stone-500 font-bold rounded-md hover:scale-105 active:scale-100 transition-all duration-100;
+  @apply w-20 md:w-24 lg:w-28 py-2 px-3 m-2 bg-stone-500/80 font-bold rounded-md hover:scale-105 active:scale-100 transition-all duration-100;
 }
 @tailwind utilities;
 @layer base {
