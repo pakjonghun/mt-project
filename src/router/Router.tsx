@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "../components/Header/Header";
-import Main from "../pages/main/Main";
+import Header from "../components/Header";
+import Main from "../pages/Main";
 import Movie from "../pages/movie";
 import TV from "../pages/tv";
 import { KeyRouters } from "./types";

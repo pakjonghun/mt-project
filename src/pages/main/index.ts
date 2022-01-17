@@ -1,3 +1,2 @@
-import main from "./Main";
-
-export default main;
+import Main from "./Main";
+export default Main;

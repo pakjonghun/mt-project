@@ -3,6 +3,7 @@ import Input from "./components/Input";
 import List from "../List";
 import Logo from "./components/Logo";
 import Menu from "./components/Menu";
+import { KeyRouters } from "../../router/types";
 
 const Header = () => {
   const style = {
@@ -17,8 +18,8 @@ const Header = () => {
           styles={style}
           contents={[
             <Logo />,
-            <Menu title={"Movie"} path={"movies"} />,
-            <Menu title={"TV"} path={"tvs"} />,
+            <Menu title={"Movie"} path={KeyRouters.movies} />,
+            <Menu title={"TV"} path={KeyRouters.tvs} />,
           ]}
         />
         <Input />
