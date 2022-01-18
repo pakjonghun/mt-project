@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { KeyRouters } from "../../../router/types";
+import { Paths } from "../../../router/types";
 
 const Logo = () => {
   return (
     <Link
       className="flex items-center justify-center h-full px-5 hover:scale-110 active:scale-100 transition-all duration-200 ease-linear"
-      to={KeyRouters.home}
+      to={Paths.home}
     >
       <motion.svg
         whileHover={{ opacity: [1, 0.1, 1] }}

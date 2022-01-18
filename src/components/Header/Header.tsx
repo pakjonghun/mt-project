@@ -4,7 +4,7 @@ import Input from "./components/Input";
 import List from "../List";
 import Logo from "./components/Logo";
 import Menu from "./components/Menu";
-import { KeyRouters } from "../../router/types";
+import { Paths } from "../../router/types";
 import { useTransform, useViewportScroll, motion } from "framer-motion";
 
 const Header = () => {
@@ -25,7 +25,10 @@ const Header = () => {
 
   return (
     //header height-size must pt-size
-    <div className=" min-h-screen pt-20 pb-10 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black">
+    <div
+      style={{ paddingBottom: "10%" }}
+      className=" min-h-screen pt-20 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black"
+    >
       <motion.header
         style={{ backgroundColor: headerController }}
         className="fixed top-0 flex item-center justify-between w-full h-20 md:h-24 bg-black z-10"
@@ -34,8 +37,8 @@ const Header = () => {
           styles={style}
           contents={[
             <Logo />,
-            <Menu title={"Movie"} path={KeyRouters.movies} />,
-            <Menu title={"TV"} path={KeyRouters.tvs} />,
+            <Menu title={"Movie"} path={Paths.movies} />,
+            <Menu title={"TV"} path={Paths.tvs} />,
           ]}
         />
         <Input />

@@ -1,34 +1,33 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { getImageUrl, textCutter } from "../../../utilities/utility";
 import basic from "../../../images/empty.jpg";
+import { motion } from "framer-motion";
 
 type Data = {
   title?: string;
   backdrop_path?: string;
+  id?: number;
 };
 
 interface ItemProps {
   data: Data;
-  img: React.RefObject<HTMLImageElement>;
 }
 
 const Item: React.FC<ItemProps> = ({
-  data: { title = "", backdrop_path = "" },
-  img,
+  data: { title = "", backdrop_path = "", id },
 }) => {
   return (
-    <>
+    <motion.div layoutId={String(id).trim()}>
       <img
-        ref={img}
-        className="w-full h-full"
+        alt={title}
         src={getImageUrl(backdrop_path)}
         onError={(event) => (event.currentTarget.src = basic)}
-        alt={title}
+        className="w-full h-full"
       />
       <small className="absolute bottom-0 scale-y-0 group-hover:scale-y-100 group-hover:translate-y-7 origin-top w-full mt-1 text-white font-bold text-center">
         {textCutter(title, 15)}
       </small>
-    </>
+    </motion.div>
   );
 };
 

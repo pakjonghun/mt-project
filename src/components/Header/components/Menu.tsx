@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useMatch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { Paths } from "../../../router/types";
 import Border from "../../Border";
-import { KeyRouters } from "../../../router/types";
 
 interface MenuProps {
-  path: keyof typeof KeyRouters;
+  path: keyof typeof Paths;
   title: string;
 }
 

@@ -3,16 +3,25 @@ import Header from "../components/Header";
 import Main from "../pages/Main";
 import Movie from "../pages/movie";
 import TV from "../pages/tv";
-import { KeyRouters } from "./types";
+import { Paths } from "./types";
 
 const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={KeyRouters.home} element={<Header />}>
-          <Route path="" element={<Main />} />
-          <Route path={KeyRouters.movies} element={<Movie />} />
-          <Route path={KeyRouters.tvs} element={<TV />} />
+        <Route path={Paths.home} element={<Header />}>
+          <Route path="" element={<Main />}>
+            <Route path="movies/:id" element={<Main />} />
+            <Route path="tvs/:id" element={<Main />} />
+          </Route>
+
+          <Route path={Paths.movies} element={<Movie />}>
+            <Route path="detail/:id" element={<Movie />} />
+          </Route>
+
+          <Route path={Paths.tvs} element={<TV />}>
+            <Route path="detail/:id" element={<TV />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
