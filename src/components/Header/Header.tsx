@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     //header height-size must pt-size
-    <div className=" min-h-screen pt-20 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black">
+    <div className=" min-h-screen pt-20 pb-10 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black">
       <motion.header
         style={{ backgroundColor: headerController }}
         className="fixed top-0 flex item-center justify-between w-full h-20 md:h-24 bg-black z-10"

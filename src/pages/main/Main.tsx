@@ -26,6 +26,7 @@ const Main = () => {
           <SwitchButtons isMovie={isMovie} setIsMovie={setIsMovie} />
           <Banners isMovie={isMovie} />
           {movies && <Carocel data={movies} />}
+          <br />
           {changeTvKey && <Carocel data={changeTvKey} />}
         </div>
       )}

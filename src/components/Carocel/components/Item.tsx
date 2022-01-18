@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { getImageUrl, textCutter } from "../../../utilities/utility";
+import basic from "../../../images/empty.jpg";
+
+type Data = {
+  title?: string;
+  backdrop_path?: string;
+};
 
 interface ItemProps {
-  image?: string;
-  title?: string;
+  data: Data;
+  img: React.RefObject<HTMLImageElement>;
 }
 
-const Item: React.FC<ItemProps> = ({ image = "", title = "" }) => {
+const Item: React.FC<ItemProps> = ({
+  data: { title = "", backdrop_path = "" },
+  img,
+}) => {
   return (
     <>
       <img
-        className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 2xl:h-40"
-        src={getImageUrl(image)}
+        ref={img}
+        className="w-full h-full"
+        src={getImageUrl(backdrop_path)}
+        onError={(event) => (event.currentTarget.src = basic)}
         alt={title}
       />
-      <small
-        style={{ bottom: "-20%" }}
-        className="absolute -bottom-5 w-full block text-center bg-yellow-300"
-      >
+      <small className="absolute bottom-0 scale-y-0 group-hover:scale-y-100 group-hover:translate-y-7 origin-top w-full mt-1 text-white font-bold text-center">
         {textCutter(title, 15)}
       </small>
     </>
