@@ -1,6 +1,7 @@
 import React from "react";
 import { getImageUrl } from "../../../utilities/utility";
 import basicImg from "../../../images/empty.jpg";
+import Stars from "../../Header/components/Stars";
 
 interface PreInfoProps {
   image?: string;
@@ -15,15 +16,19 @@ const PreInfo: React.FC<PreInfoProps> = ({
 }) => {
   return (
     <div className="">
-      <div className="relative after:absolute after:inset-0 after:-skew-y-12 after:bg-black/20 rounded-md overflow-hidden">
+      <div className="relative after:absolute after:inset-0 after:-skew-y-12 after:bg-stone-400/20 rounded-md overflow-hidden">
         <img
           src={getImageUrl(image)}
           onError={(event) => (event.currentTarget.src = basicImg)}
           alt={title}
-          className=""
+          className="w-full"
         />
       </div>
-      <h4>{title}</h4>
+      <h4 className="h4 mx-3 mt-3 mb-4 font-bold">{title}</h4>
+      <p className="flex mx-3">
+        <span className="mr-3">{vote}</span>
+        <Stars vote={vote} />
+      </p>
     </div>
   );
 };

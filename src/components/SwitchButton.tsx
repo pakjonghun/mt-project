@@ -1,22 +1,22 @@
 import React from "react";
 
 interface SwitchButtonProps {
-  isMovie: boolean;
+  disabled: boolean;
   title: string;
   onClick: () => void;
 }
 
 const SwitchButton: React.FC<SwitchButtonProps> = ({
   onClick,
-  isMovie,
+  disabled,
   title,
 }) => {
   return (
     <button
       onClick={() => onClick()}
-      disabled={!isMovie}
-      className={`switchButton ${
-        !isMovie ? "pointer-events-none opacity-50" : "pointer-events-auto"
+      disabled={!disabled}
+      className={`switchButton select-none ${
+        !disabled ? "pointer-events-none opacity-40" : "pointer-events-auto"
       }`}
     >
       {title}

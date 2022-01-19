@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppSelector } from "../hooks/reduxHooks";
 import Banner from "./Banner";
 
 interface BannerWrapperProps {

@@ -25,9 +25,7 @@ const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    movieSave: (state, { payload }: PayloadAction<Movie[]>) => {
-      return [...state, ...payload];
-    },
+    movieSave: (_, { payload }: PayloadAction<Movie[]>) => payload,
   },
 });
 

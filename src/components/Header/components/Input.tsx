@@ -42,7 +42,7 @@ const Input = () => {
           isSearch
             ? " -translate-x-48 md:-translate-x-52 lg:-translate-x-56 2xl:-translate-x-64"
             : ""
-        } right-4 w-4 md:w-5 lg:w-6 2xl:w-7 text-stone-500 cursor-pointer hover:scale-110 active:scale-100 transition-all duration-190 z-10`}
+        } right-4 w-4 md:w-5 lg:w-6 2xl:w-7 text-stone-400 cursor-pointer hover:scale-110 active:scale-100 transition-all duration-190 z-10`}
       >
         <path
           fill="currentColor"

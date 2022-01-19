@@ -23,9 +23,7 @@ const tvSlice = createSlice({
   name: "tv",
   initialState,
   reducers: {
-    tvSave: (state, action: PayloadAction<TV[]>) => {
-      return [...state, ...action.payload];
-    },
+    tvSave: (_, { payload }: PayloadAction<TV[]>) => payload,
   },
 });
 

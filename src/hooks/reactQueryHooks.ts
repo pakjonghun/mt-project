@@ -1,4 +1,5 @@
-import { useQueryClient } from "react-query";
+import { useAppDispatch } from "./reduxHooks";
+import { QueryCache, useQueryClient } from "react-query";
 
 type QueryProps = {
   key: string;

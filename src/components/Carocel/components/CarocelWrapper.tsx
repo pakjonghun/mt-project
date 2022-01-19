@@ -17,6 +17,14 @@ interface CarocelWrapperProps {
   dataLength: number;
 }
 
+const gridCol = {
+  ["3" as string]: "grid-cols-3",
+  "4": "grid-cols-4",
+  "5": "grid-cols-5",
+  "6": "grid-cols-6",
+  "7": "grid-cols-7",
+};
+
 const CarocelWrapper: React.FC<CarocelWrapperProps> = ({
   slider,
   response,
@@ -25,12 +33,7 @@ const CarocelWrapper: React.FC<CarocelWrapperProps> = ({
 }) => {
   const { index, direction, isSliding, setIsSliding, switchHandler } = slider;
   const { count, imgPadding } = response;
-  const [isOnAni, setIsOnAnt] = useState(false);
   const max = Math.ceil((dataLength - 2) / count);
-
-  useLayoutEffect(() => {
-    setIsOnAnt(true);
-  }, []);
 
   return (
     <motion.div
@@ -58,8 +61,7 @@ const CarocelWrapper: React.FC<CarocelWrapperProps> = ({
           initial="initial"
           animate="animate"
           exit="exit"
-          style={{ gridTemplateColumns: `repeat(${count},1fr)` }}
-          className="absolute grid gap-4 col-span-10 place-content-center px-10"
+          className={`absolute grid gap-4 ${gridCol[count]} col-span-10 place-content-center px-10`}
         >
           {children}
         </motion.div>

@@ -1,4 +1,3 @@
-import { TMDBData, Movie } from "./../apis/types";
 import { QueryClient } from "react-query";
 import { createStandaloneToast, UseToastOptions } from "@chakra-ui/react";
 

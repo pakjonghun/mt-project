@@ -1,6 +1,7 @@
 import React from "react";
-import SwitchButton from "./SwitchButton";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import SwitchButton from "../../../components/SwitchButton";
+import useHideByScroll from "../../../hooks/scrollHooks";
 
 interface SwitchProps {
   isMovie: boolean;
@@ -8,8 +9,7 @@ interface SwitchProps {
 }
 
 const Switch: React.FC<SwitchProps> = ({ isMovie, setIsMovie }) => {
-  const { scrollY } = useViewportScroll();
-  const buttonOpacity = useTransform(scrollY, [60, 80], [1, 0]);
+  const buttonOpacity = useHideByScroll(60, 80);
 
   const onClick = () => setIsMovie(!isMovie);
   return (
@@ -17,8 +17,8 @@ const Switch: React.FC<SwitchProps> = ({ isMovie, setIsMovie }) => {
       style={{ opacity: buttonOpacity }}
       className="absolute top-10 right-5 text-right"
     >
-      <SwitchButton onClick={onClick} isMovie={!isMovie} title={"Movie"} />
-      <SwitchButton onClick={onClick} isMovie={isMovie} title={"TV"} />
+      <SwitchButton onClick={onClick} disabled={!isMovie} title={"Movie"} />
+      <SwitchButton onClick={onClick} disabled={isMovie} title={"TV"} />
     </motion.div>
   );
 };

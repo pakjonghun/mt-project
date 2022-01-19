@@ -1,5 +1,4 @@
-import { BASIC_URL } from "./constants";
-const key = process.env.REACT_APP_KEY;
+import { MOVIE_URL, TV_URL, API_PARAM } from "./constants";
 
 const getData = async (url: string) => {
   const res = await fetch(url);
@@ -8,18 +7,18 @@ const getData = async (url: string) => {
 
 export const movieApis = {
   nowPlaying: (page: number = 1) =>
-    getData(
-      `${BASIC_URL}/movie/now_playing?api_key=${key}&adult=${false}&page=${page}`
-    ),
-  detail: (id: number) => {
-    getData(`${BASIC_URL}/movie/${id}?api_key=${key}`);
-  },
+    getData(`${MOVIE_URL}/now_playing${API_PARAM}&adult=${false}&page=${page}`),
+  topRated: (page: number = 1) =>
+    getData(`${MOVIE_URL}/top_rated${API_PARAM}&adult=${false}&page=${page}`),
+  detail: (id: string) => getData(`${MOVIE_URL}/${id}${API_PARAM}`),
+  video: (id: number) => getData(`${MOVIE_URL}/${id}/videos${API_PARAM}`),
 };
 
 export const tvApis = {
   onTheAir: (page: number = 1) =>
-    getData(`${BASIC_URL}/tv/on_the_air?api_key=${key}&page=${page}`),
-  detail: (id: number) => {
-    getData(`${BASIC_URL}/tv/${id}?api_key=${key}`);
-  },
+    getData(`${TV_URL}/on_the_air${API_PARAM}&page=${page}`),
+  topRated: (page: number = 1) =>
+    getData(`${TV_URL}/top_rated${API_PARAM}&adult=${false}&page=${page}`),
+  detail: (id?: string) => getData(`${TV_URL}/${id}${API_PARAM}`),
+  video: (id: number) => getData(`${TV_URL}/${id}/videos${API_PARAM}`),
 };

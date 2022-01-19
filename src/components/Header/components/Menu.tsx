@@ -3,6 +3,7 @@ import { Link, useMatch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Paths } from "../../../router/types";
 import Border from "../../Border";
+import { useGetMiddlePath } from "../../Carocel/hooks/hooks";
 
 interface MenuProps {
   path: keyof typeof Paths;
@@ -10,7 +11,7 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ path, title }) => {
-  const isMatch = useMatch(path);
+  const isMatch = useGetMiddlePath() === path;
   return (
     <Link
       to={path}

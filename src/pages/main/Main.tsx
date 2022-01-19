@@ -2,7 +2,7 @@ import React from "react";
 import { useGetMovie, useGetTV } from "./hooks/mainHooks";
 import SwitchButtons from "./components/SwitchButtons";
 import Loading from "../../components/Loading";
-import Banners from "./components/Banners";
+import Banners from "../../components/Banners";
 import Carocel from "../../components/Carocel";
 import Modal from "../../components/Modal/Modal";
 import { Paths } from "../../router/types";
@@ -26,13 +26,13 @@ const Main = () => {
             <SwitchButtons isMovie={isMovie} setIsMovie={setIsMovie} />
             <Banners isMovie={isMovie} />
             {Mdata?.results && (
-              <Carocel path={Paths.home} data={Mdata?.results} />
+              <Carocel path={Paths.movies} data={Mdata?.results} />
             )}
-            {changeTvKey && <Carocel path={Paths.home} data={changeTvKey} />}
+            {changeTvKey && <Carocel path={Paths.tvs} data={changeTvKey} />}
           </div>
         )}
       </main>
-      <Modal isMovie={isMovie} />
+      <Modal />
     </>
   );
 };
