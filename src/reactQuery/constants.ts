@@ -4,4 +4,6 @@ export const queryKeys = {
   onplaying: "onplaying",
   detail: "detail",
   video: "video",
+  movieSearch: "movieSearch",
+  TVSearch: "TVSearch",
 };

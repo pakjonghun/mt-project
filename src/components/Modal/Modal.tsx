@@ -6,11 +6,10 @@ import TVMain from "./components/TVMain";
 import { useFindItem } from "./hooks/hooks";
 import ModalWrapper from "./ModalWrapper";
 
-interface ModalProps {}
-
-const Modal: React.FC<ModalProps> = () => {
+const Modal = () => {
   const { item, id, path } = useFindItem();
   if (!item || !id) return null;
+
   return (
     <ModalWrapper id={id}>
       <PreInfo
@@ -18,8 +17,12 @@ const Modal: React.FC<ModalProps> = () => {
         image={item.backdrop_path}
         vote={item.vote_average}
       />
-      {path === Paths.movies && <MovieMain id={id} />}
-      {path === Paths.tvs && <TVMain id={id} />}
+      {path && path.some((p) => p === Paths.movies || p === Paths.movie) && (
+        <MovieMain id={id} />
+      )}
+      {path && path.some((p) => p === Paths.tvs || p === Paths.tv) && (
+        <TVMain id={id} />
+      )}
     </ModalWrapper>
   );
 };

@@ -9,7 +9,7 @@ const Stars: React.FC<StarsProps> = ({ vote }) => {
   const fullStar = Math.floor(vote);
   const halfStar = Math.ceil(vote - fullStar);
   const delay = 0.2;
-
+  if (!vote) return <></>;
   return (
     <span className="flex">
       {[...Array(fullStar)].map((_, index) => (

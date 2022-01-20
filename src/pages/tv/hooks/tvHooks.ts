@@ -18,7 +18,6 @@ export const useGetTV = (page: number = 1) => {
     {
       onSuccess: (data) => {
         checkWarning(data);
-        // data.results?.length && dispatch(tvSave(data.results));
       },
     }
   );

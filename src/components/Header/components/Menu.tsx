@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Paths } from "../../../router/types";
 import Border from "../../Border";
@@ -11,7 +11,8 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ path, title }) => {
-  const isMatch = useGetMiddlePath() === path;
+  const isMatch = useGetMiddlePath()?.[1] === path;
+
   return (
     <Link
       to={path}

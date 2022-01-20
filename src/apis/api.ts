@@ -1,4 +1,4 @@
-import { MOVIE_URL, TV_URL, API_PARAM } from "./constants";
+import { MOVIE_URL, TV_URL, API_PARAM, BASIC_URL } from "./constants";
 
 const getData = async (url: string) => {
   const res = await fetch(url);
@@ -21,4 +21,14 @@ export const tvApis = {
     getData(`${TV_URL}/top_rated${API_PARAM}&adult=${false}&page=${page}`),
   detail: (id?: string) => getData(`${TV_URL}/${id}${API_PARAM}`),
   video: (id: number) => getData(`${TV_URL}/${id}/videos${API_PARAM}`),
+};
+
+type SearchTarget = "movie" | "tv" | "multi";
+export const search = (
+  term: string,
+  searchTarget: SearchTarget,
+  { pageParam = 1 }
+) => {
+  const url = `${BASIC_URL}/search/${searchTarget}/${API_PARAM}&include_adult=${false}&query=${term}&page=${pageParam}`;
+  return getData(url);
 };

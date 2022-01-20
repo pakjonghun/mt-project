@@ -5,17 +5,11 @@ const initialState: TV[] = [
   {
     backdrop_path: "",
     first_air_date: "",
-    genre_ids: [],
     id: 1,
     name: "",
-    origin_country: [],
-    original_language: "",
     original_name: "",
     overview: "",
-    popularity: 1,
-    poster_path: "",
     vote_average: 1,
-    vote_count: 1,
   },
 ];
 
@@ -24,8 +18,11 @@ const tvSlice = createSlice({
   initialState,
   reducers: {
     tvSave: (_, { payload }: PayloadAction<TV[]>) => payload,
+    tvInfinity: (state, { payload }: PayloadAction<TV[]>) => {
+      return [...state, ...payload];
+    },
   },
 });
 
-export const { tvSave } = tvSlice.actions;
+export const { tvSave, tvInfinity } = tvSlice.actions;
 export default tvSlice.reducer;

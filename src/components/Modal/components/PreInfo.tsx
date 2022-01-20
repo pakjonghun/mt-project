@@ -1,7 +1,7 @@
 import React from "react";
 import { getImageUrl } from "../../../utilities/utility";
 import basicImg from "../../../images/empty.jpg";
-import Stars from "../../Header/components/Stars";
+import Stars from "../../Stars";
 
 interface PreInfoProps {
   image?: string;
@@ -25,10 +25,12 @@ const PreInfo: React.FC<PreInfoProps> = ({
         />
       </div>
       <h4 className="h4 mx-3 mt-3 mb-4 font-bold">{title}</h4>
-      <p className="flex mx-3">
-        <span className="mr-3">{vote}</span>
-        <Stars vote={vote} />
-      </p>
+      {!!vote && (
+        <p className="flex mx-3">
+          <span className="mr-3">{vote}</span>
+          <Stars vote={vote} />
+        </p>
+      )}
     </div>
   );
 };

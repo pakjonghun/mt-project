@@ -29,7 +29,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({ children, id }) => {
           <div className="h-full w-full pb-8 overflow-y-auto shadow-sky-300 shadow-lg bg-stone-500 text-stone-200">
             <button
               id="exit"
-              className="absolute top-0 left-0 px-2 py-1 text-slate-300 bg-stone-700  z-50 cursor-pointer hover:scale-110 rounded-sm active:scale-100 transition-all duration duration-75"
+              className="absolute top-0 left-0 px-2 py-1 text-slate-300 bg-stone-700  z-50 cursor-pointer opacity-50 hover:scale-110 hover:opacity-75 rounded-sm active:scale-100 transition-all duration duration-75"
               onClick={() => navigate(-1)}
             >
               ✕

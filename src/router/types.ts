@@ -4,4 +4,7 @@ export enum Paths {
   "home" = "/",
   "detail" = "detail",
   "search" = "search",
+  "movie" = "movie",
+  "tv" = "tv",
+  "multi" = "multi",
 }

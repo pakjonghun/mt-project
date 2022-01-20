@@ -6,6 +6,7 @@ import Logo from "./components/Logo";
 import Menu from "./components/Menu";
 import { Paths } from "../../router/types";
 import { useTransform, useViewportScroll, motion } from "framer-motion";
+import { useGetMiddlePath } from "../Carocel/hooks/hooks";
 
 const Header = () => {
   const { scrollY } = useViewportScroll();
@@ -22,6 +23,7 @@ const Header = () => {
     }),
     []
   );
+  const path = useGetMiddlePath();
 
   return (
     //header height-size must pt-size
@@ -30,7 +32,9 @@ const Header = () => {
       className=" min-h-screen pt-20 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black"
     >
       <motion.header
-        style={{ backgroundColor: headerController }}
+        style={{
+          backgroundColor: path?.[1] === "search" ? "1" : headerController,
+        }}
         className="fixed top-0 flex item-center justify-between w-full h-20 md:h-24 bg-black z-10"
       >
         <List

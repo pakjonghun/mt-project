@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../../ErrorMessage";
 
-type SearchForm = {
+export type SearchForm = {
   term: string;
 };
 
@@ -17,8 +18,10 @@ const Input = () => {
     formState: { errors },
   } = useForm<SearchForm>({ mode: "onChange" });
 
+  const navigate = useNavigate();
+
   const onSubmit = (value: SearchForm) => {
-    console.log(value);
+    navigate(`/search?term=${value.term}`);
   };
 
   const onClick = () => {

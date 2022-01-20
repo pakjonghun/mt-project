@@ -10,7 +10,6 @@ interface MovieMainProps {
 const MovieMain: React.FC<MovieMainProps> = ({ id }) => {
   const { isLoading: MLoading, data: MData } = useGetMovieDetail(id);
   const { isLoading: VLoading, data: VData } = useGetMovieVideo(+id);
-
   if (MLoading || VLoading) {
     return (
       <div className="w-full h-full flex items-center justify-center">
