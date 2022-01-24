@@ -6,6 +6,7 @@ import { useSearch } from "./hooks/hooks";
 import { useGetMovieSearchResult } from "./hooks/reactQueryHooks";
 import TargetItem from "./components/TargetItem";
 import useInfinityScroll from "./hooks/infinityScroll";
+import { Helmet } from "react-helmet-async";
 
 export type SearchTarget = "movie" | "tv" | "multi";
 
@@ -28,6 +29,9 @@ const Search = () => {
 
   return (
     <main className="px-3 text-stone-300">
+      <Helmet>
+        <title>Search</title>
+      </Helmet>
       <div ref={ref} className="mx-auto w-fit overflow-y-auto">
         <div className="flex items-center justify-between mb-5">
           <h1 className="h4 font-bold">{`${term} : Total Search Results ${getCommaNumber(

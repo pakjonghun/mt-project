@@ -6,6 +6,7 @@ import Banners from "../../components/Banners";
 import Carocel from "../../components/Carocel";
 import Modal from "../../components/Modal/Modal";
 import { Paths } from "../../router/types";
+import { Helmet } from "react-helmet-async";
 
 const Main = () => {
   const [isMovie, setIsMovie] = React.useState(true);
@@ -16,6 +17,9 @@ const Main = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Main</title>
+      </Helmet>
       <main className="relative">
         {Mloading || Tloading ? (
           <div className="flex items-center justify-center h-screen">
