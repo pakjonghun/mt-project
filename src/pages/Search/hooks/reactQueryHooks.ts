@@ -1,7 +1,8 @@
+import { Paths } from "./../../../router/types";
 import { SearchTarget } from "./../Search";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { search } from "../../../apis/api";
 import { Movie, MTType, TMDBData, TV } from "./../../../apis/types";
 import { checkWarning } from "../../../utilities/utility";
@@ -39,7 +40,7 @@ export const useGetMovieSearchResult = (
 
   const { isLoading, data, hasNextPage, fetchNextPage, isFetching } =
     useInfiniteQuery<TMDBData<MTType[]>>(
-      "search",
+      [Paths.search, term],
       ({ pageParam = page }) => search(term, searchTarget, { pageParam }),
       {
         getNextPageParam: (last) => last.page + 1 || undefined,

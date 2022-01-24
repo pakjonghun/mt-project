@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Loading from "../../components/Loading";
 import Modal from "../../components/Modal/Modal";
 import { getCommaNumber } from "../../utilities/utility";
