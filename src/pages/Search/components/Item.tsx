@@ -12,7 +12,6 @@ interface ItemProps {
 const Item: React.FC<ItemProps> = ({ data }) => {
   const { search } = useLocation();
   const navigate = useNavigate();
-
   return (
     <div
       onClick={() => navigate(`${data.media_type}/${data.id}${search}`)}

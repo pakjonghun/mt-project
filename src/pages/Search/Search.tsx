@@ -2,44 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 import Loading from "../../components/Loading";
 import Modal from "../../components/Modal/Modal";
 import { getCommaNumber } from "../../utilities/utility";
-import Item from "./components/Item";
 import { useSearch } from "./hooks/hooks";
 import { useGetMovieSearchResult } from "./hooks/reactQueryHooks";
+import TargetItem from "./components/TargetItem";
+import useInfinityScroll from "./hooks/infinityScroll";
 
 export type SearchTarget = "movie" | "tv" | "multi";
 
 const Search = () => {
   const [searchTareget, setSearchTarget] = useState<SearchTarget>("multi");
+  const ref = useRef<HTMLDivElement>(null);
   const term = useSearch();
   const data = useGetMovieSearchResult(term || "", 1, searchTareget);
+  useInfinityScroll(data);
 
-  const ref = useRef<HTMLDivElement>(null);
   const onSelected = (value: SearchTarget) => setSearchTarget(value);
 
-  useEffect(() => {
-    const getScroll = () => {
-      const totalScorolled =
-        document.documentElement.clientHeight + window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight;
-
-      if (totalScorolled + 400 >= scrollHeight) {
-        if (data.hasNextPage && !data.isFetching) data.fetchNextPage();
-      }
-    };
-
-    let timer: null | NodeJS.Timeout;
-    const throttling = () => {
-      if (!timer) {
-        timer = setTimeout(() => {
-          timer = null;
-          getScroll();
-        }, 1);
-      }
-    };
-
-    window.addEventListener("scroll", throttling);
-    return () => window.removeEventListener("scroll", throttling);
-  }, [data]);
   if (data.isLoading) {
     return (
       <div className="flex justify-center items-center  w-full h-screen bg-black">
@@ -70,25 +48,11 @@ const Search = () => {
           <div
             className={`grid items-start grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 w-full`}
           >
-            {data.data?.pages?.map((item) =>
-              item.results.map((jtem) => {
-                switch (searchTareget) {
-                  case "movie":
-                    if (jtem.media_type !== "movie") break;
-                    return <Item key={jtem.id} data={jtem} />;
-
-                  case "tv":
-                    if (jtem.media_type !== "tv") break;
-                    return <Item key={jtem.id} data={jtem} />;
-
-                  case "multi":
-                    if (jtem.media_type !== "movie" && jtem.media_type !== "tv")
-                      break;
-                    return <Item key={jtem.id} data={jtem} />;
-                  default:
-                    break;
-                }
-              })
+            {data.data?.pages && (
+              <TargetItem
+                data={data.data?.pages}
+                searchTareget={searchTareget}
+              />
             )}
           </div>
         </div>
