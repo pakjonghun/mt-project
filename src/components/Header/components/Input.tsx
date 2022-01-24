@@ -21,7 +21,7 @@ const Input = () => {
   const navigate = useNavigate();
 
   const onSubmit = (value: SearchForm) => {
-    navigate(`/search?term=${value.term}`);
+    navigate(`search?term=${value.term}`);
   };
 
   const onClick = () => {

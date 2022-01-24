@@ -4,7 +4,6 @@ const getData = async (url: string) => {
   const res = await fetch(url);
   return res.json();
 };
-
 export const movieApis = {
   nowPlaying: (page: number = 1) =>
     getData(`${MOVIE_URL}/now_playing${API_PARAM}&adult=${false}&page=${page}`),

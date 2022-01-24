@@ -2,7 +2,7 @@ import { Paths } from "./../../../router/types";
 import { SearchTarget } from "./../Search";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import { search } from "../../../apis/api";
 import { Movie, MTType, TMDBData, TV } from "./../../../apis/types";
 import { checkWarning } from "../../../utilities/utility";
