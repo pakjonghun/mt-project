@@ -1,7 +1,7 @@
-import { checkWarning } from "./../../../utilities/utility";
-import { queryKeys } from "./../../../reactQuery/constants";
-import { TMDBData, Movie, TV } from "./../../../apis/types";
-import { movieApis, tvApis } from "./../../../apis/api";
+import { checkWarning } from "../../../utilities/utility";
+import { queryKeys } from "../../../reactQuery/constants";
+import { TMDBData, Movie, TV } from "../../../apis/types";
+import { movieApis, tvApis } from "../../../apis/api";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { useQuery } from "react-query";
 import { movieSave } from "../../../store/reducers/movie";
