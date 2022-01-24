@@ -3,6 +3,9 @@ import { UseToastOptions } from "@chakra-ui/react";
 import { createStandaloneToast } from "@chakra-ui/react";
 type Image = "w500" | "original";
 
+export const getCommaNumber = (number?: number) =>
+  number ? number.toLocaleString() : 0;
+
 export const getId = () => Math.random().toString(20).substring(0, 12);
 
 export const getImageUrl = (id: string, size: Image = "w500") =>

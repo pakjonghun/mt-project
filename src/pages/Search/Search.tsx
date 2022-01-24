@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Loading from "../../components/Loading";
 import Modal from "../../components/Modal/Modal";
+import { getCommaNumber } from "../../utilities/utility";
 import Item from "./components/Item";
 import { useSearch } from "./hooks/hooks";
 import { useGetMovieSearchResult } from "./hooks/reactQueryHooks";
@@ -22,7 +23,7 @@ const Search = () => {
       const scrollHeight = document.documentElement.scrollHeight;
 
       if (totalScorolled + 400 >= scrollHeight) {
-        if (data.hasNextPage) data.fetchNextPage();
+        if (data.hasNextPage && !data.isFetching) data.fetchNextPage();
       }
     };
 
@@ -32,7 +33,7 @@ const Search = () => {
         timer = setTimeout(() => {
           timer = null;
           getScroll();
-        }, 10);
+        }, 1);
       }
     };
 
@@ -50,10 +51,13 @@ const Search = () => {
   return (
     <main className="px-3 text-stone-300">
       <div ref={ref} className="mx-auto w-fit overflow-y-auto">
-        <div className="flex items-center mb-5">
-          <h1 className="h4 font-bold">{`${term} : Search Result`}</h1>
+        <div className="flex items-center justify-between mb-5">
+          <h1 className="h4 font-bold">{`${term} : Total Search Results ${getCommaNumber(
+            data?.data?.pages[0].total_results &&
+              +data?.data?.pages[0].total_results
+          )}`}</h1>
           <select
-            className="ml-3 h-fit"
+            className="ml-3 h-fit px-3 py-1 rounded-sm"
             defaultValue={searchTareget}
             onChange={(event) => onSelected(event.target.value as SearchTarget)}
           >

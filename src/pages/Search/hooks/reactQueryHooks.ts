@@ -37,16 +37,15 @@ export const useGetMovieSearchResult = (
 ) => {
   const dispatch = useDispatch();
 
-  const { isLoading, data, hasNextPage, fetchNextPage } = useInfiniteQuery<
-    TMDBData<MTType[]>
-  >(
-    "search",
-    ({ pageParam = page }) => search(term, searchTarget, { pageParam }),
-    {
-      getNextPageParam: (last) => last.page + 1 || undefined,
-      onSuccess: (data) => checkWarning(data.pages[data.pages.length - 1]),
-    }
-  );
+  const { isLoading, data, hasNextPage, fetchNextPage, isFetching } =
+    useInfiniteQuery<TMDBData<MTType[]>>(
+      "search",
+      ({ pageParam = page }) => search(term, searchTarget, { pageParam }),
+      {
+        getNextPageParam: (last) => last.page + 1 || undefined,
+        onSuccess: (data) => checkWarning(data.pages[data.pages.length - 1]),
+      }
+    );
 
   const temp = data?.pages[data.pages.length - 1].results;
 
@@ -57,5 +56,5 @@ export const useGetMovieSearchResult = (
     }
   }, [dispatch, data, searchTarget, temp]);
 
-  return { isLoading, data, hasNextPage, fetchNextPage };
+  return { isLoading, data, hasNextPage, fetchNextPage, isFetching };
 };
