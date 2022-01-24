@@ -41,23 +41,21 @@ export const useGetMovieSearchResult = (
     TMDBData<MTType[]>
   >(
     "search",
-    ({ pageParam = page }) => {
-      return search(term, searchTarget, { pageParam });
-    },
+    ({ pageParam = page }) => search(term, searchTarget, { pageParam }),
     {
       getNextPageParam: (last) => last.page + 1 || undefined,
-      onSuccess: (data) => checkWarning(data.pages[0]),
+      onSuccess: (data) => checkWarning(data.pages[data.pages.length - 1]),
     }
   );
 
-  const temp = data?.pages;
+  const temp = data?.pages[data.pages.length - 1].results;
 
   useEffect(() => {
-    if (temp) {
-      const data = getMatchData(temp, searchTarget);
-      data?.forEach((item) => dispatch(item));
+    if (data && temp) {
+      const contents = getMatchData(temp, searchTarget);
+      contents?.forEach((item) => dispatch(item));
     }
-  }, [dispatch, data?.pages, searchTarget, temp]);
+  }, [dispatch, data, searchTarget, temp]);
 
   return { isLoading, data, hasNextPage, fetchNextPage };
 };

@@ -25,6 +25,7 @@ const Search = () => {
         if (data.hasNextPage) data.fetchNextPage();
       }
     };
+
     let timer: null | NodeJS.Timeout;
     const throttling = () => {
       if (!timer) {
@@ -66,7 +67,24 @@ const Search = () => {
             className={`grid items-start grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 w-full`}
           >
             {data.data?.pages?.map((item) =>
-              item.results.map((jtem) => <Item key={jtem.id} data={jtem} />)
+              item.results.map((jtem) => {
+                switch (searchTareget) {
+                  case "movie":
+                    if (jtem.media_type !== "movie") break;
+                    return <Item key={jtem.id} data={jtem} />;
+
+                  case "tv":
+                    if (jtem.media_type !== "tv") break;
+                    return <Item key={jtem.id} data={jtem} />;
+
+                  case "multi":
+                    if (jtem.media_type !== "movie" && jtem.media_type !== "tv")
+                      break;
+                    return <Item key={jtem.id} data={jtem} />;
+                  default:
+                    break;
+                }
+              })
             )}
           </div>
         </div>

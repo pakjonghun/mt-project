@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MTType } from "../../../apis/types";
 import Stars from "../../../components/Stars";
