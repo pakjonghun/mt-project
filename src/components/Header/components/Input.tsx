@@ -63,7 +63,7 @@ const Input = () => {
             required: { value: true, message: "Required" },
           })}
           placeholder="Search For"
-          className="w-30 pl-9 pr-2 py-1.5 md: mr-3  bg-stone-300 text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400 rounded-md placeholder:italic"
+          className="w-30 pl-9 pr-3 py-1.5 md: mr-3 2xl:pr-4 bg-stone-300 text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400 rounded-md placeholder:italic"
         />
         {errors?.term?.message && (
           <ErrorMessage
