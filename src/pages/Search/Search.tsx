@@ -74,7 +74,7 @@ const Search = () => {
           return curData;
         },
       }),
-    []
+    [data.data?.pages, colCount]
   );
 
   useEffect(() => {
@@ -131,48 +131,49 @@ const Search = () => {
         <title>Search</title>
       </Helmet>
       <div className=" max-w-screen-2xl mx-auto">
-        <div ref={ref} className="mx-auto">
-          <div className="flex items-center justify-between mb-5">
-            <h1 className="h4 font-bold">{`${term} : Total Search Results ${getCommaNumber(
-              data?.data?.pages[0].total_results &&
-                +data?.data?.pages[0].total_results
-            )}`}</h1>
-            <select
-              className="ml-3 h-fit px-3 py-1 rounded-sm"
-              defaultValue={searchTareget}
-              onChange={(event) =>
-                onSelected(event.target.value as SearchTarget)
-              }
-            >
-              <option value="tv">TV</option>
-              <option value="movie">Movie</option>
-              <option value="multi">All</option>
-            </select>
-          </div>
-          {/* <WindowScroller>
-          {({ height, width, scrollTop, isScrolling, onChildScroll }) => ( */}
-          <AutoSizer disableHeight>
-            {({ width }) => (
-              <Grid
-                deferredMeasurementCache={cache}
-                // onScroll={onChildScroll}
-                // isScrolling={isScrolling}
-                // scrollTop={scrollTop}
-                height={Math.ceil(itemCount / colCount) * 200}
-                autoHeight
-                width={width}
-                cellRenderer={renderChild}
-                columnCount={colCount}
-                columnWidth={width / colCount}
-                rowCount={Math.ceil(itemCount / colCount)}
-                rowHeight={cache.rowHeight}
-                overscanRowCount={0}
-              />
-            )}
-          </AutoSizer>
-        </div>
-        {/* )}
-        </WindowScroller> */}
+        <WindowScroller>
+          {({ height, width, scrollTop, isScrolling, onChildScroll }) => (
+            <div ref={ref} className="mx-auto">
+              <div className="flex items-center justify-between mb-5">
+                <h1 className="h4 font-bold">{`${term} : Total Search Results ${getCommaNumber(
+                  data?.data?.pages[0].total_results &&
+                    +data?.data?.pages[0].total_results
+                )}`}</h1>
+                <select
+                  className="ml-3 h-fit px-3 py-1 rounded-sm"
+                  defaultValue={searchTareget}
+                  onChange={(event) =>
+                    onSelected(event.target.value as SearchTarget)
+                  }
+                >
+                  <option value="tv">TV</option>
+                  <option value="movie">Movie</option>
+                  <option value="multi">All</option>
+                </select>
+              </div>
+
+              <AutoSizer disableHeight>
+                {({ width }) => (
+                  <Grid
+                    deferredMeasurementCache={cache}
+                    onScroll={onChildScroll}
+                    isScrolling={isScrolling}
+                    scrollTop={scrollTop}
+                    height={height}
+                    autoHeight
+                    width={width}
+                    cellRenderer={renderChild}
+                    columnCount={colCount}
+                    columnWidth={width / colCount}
+                    rowCount={Math.ceil(itemCount / colCount)}
+                    rowHeight={cache.rowHeight}
+                    overscanRowCount={0}
+                  />
+                )}
+              </AutoSizer>
+            </div>
+          )}
+        </WindowScroller>
       </div>
       <Modal />
     </main>

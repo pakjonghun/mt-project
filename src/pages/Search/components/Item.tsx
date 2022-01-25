@@ -19,7 +19,7 @@ const Item: React.FC<ItemProps> = ({ data }) => {
     >
       <div className="overflow-hidden ">
         <img
-          className="w-full h-full max-w-sm max-h-44 mx-auto hover:scale-125 active:scale-100 transition-all duration-150 ease-linear"
+          className="w-full h-full max-w-sm max-h-44 mx-auto hover:scale-110 active:scale-100 transition-all duration-150 ease-linear"
           src={getImageUrl(data.backdrop_path)}
           onError={(event) => (event.currentTarget.src = basic)}
           alt="basic"
