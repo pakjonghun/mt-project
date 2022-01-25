@@ -15,17 +15,17 @@ const Item: React.FC<ItemProps> = ({ data }) => {
   return (
     <div
       onClick={() => navigate(`${data.media_type}/${data.id}${search}`)}
-      className="flex flex-col justify-center cursor-pointer"
+      className="flex flex-col  justify-center p-1 cursor-pointer bg-red-300"
     >
       <div className="overflow-hidden ">
         <img
-          className="w-full h-full hover:scale-125 active:scale-100 transition-all duration-150 ease-linear"
+          className="w-full h-full max-w-sm max-h-44 mx-auto hover:scale-125 active:scale-100 transition-all duration-150 ease-linear"
           src={getImageUrl(data.backdrop_path)}
           onError={(event) => (event.currentTarget.src = basic)}
           alt="basic"
         />
       </div>
-      <div className="w-full pl-2">
+      <div className="pl-2 mx-auto">
         <h4 className="w-full whitespace-nowrap">
           {textCutter(data.title || data.name || "", 24)}
         </h4>

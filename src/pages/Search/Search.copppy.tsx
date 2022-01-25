@@ -1,7 +1,6 @@
 import React, {
   CSSProperties,
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -65,21 +64,9 @@ const Search = () => {
         fixedWidth: true,
         minHeight: 250,
         defaultHeight: 500,
-        keyMapper: (row, col) => {
-          const index = colCount * row + col;
-          const page = Math.floor(index / 20);
-          const result = index - page * 20;
-          const temp = data.data?.pages[page];
-          const curData = temp && data.data?.pages[page].results[result];
-          return curData;
-        },
       }),
     []
   );
-
-  useEffect(() => {
-    cache.clearAll();
-  }, [curWidth, cache]);
 
   function cellRenderer({
     columnIndex,
@@ -94,7 +81,6 @@ const Search = () => {
     const temp = data.data?.pages[page];
     const curData = temp && data.data?.pages[page].results[result];
     const curType = curData?.media_type;
-
     return (
       <CellMeasurer
         key={key}

@@ -16,8 +16,7 @@ const useInfinityScroll = (data: Data) => {
       const totalScorolled =
         document.documentElement.clientHeight + window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
-
-      if (totalScorolled + 400 >= scrollHeight) {
+      if (totalScorolled + window.innerHeight / 2 >= scrollHeight) {
         if (data.hasNextPage && !data.isFetching) data.fetchNextPage();
       }
     };

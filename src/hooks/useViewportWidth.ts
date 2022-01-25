@@ -14,7 +14,7 @@ const useViewPortWidth = () => {
     const w = window.innerWidth;
     switch (true) {
       case w < Width.sm:
-        return Width.sm;
+        return 639;
       case w < Width.md:
         return Width.sm;
       case w < Width.lg:
