@@ -12,15 +12,11 @@ interface ItemProps {
 const Item: React.FC<ItemProps> = ({ data }) => {
   const { search } = useLocation();
   const navigate = useNavigate();
-  if (data.media_type !== "movie") {
-    if (data.media_type !== "tv") {
-      console.log(data.media_type, data);
-    }
-  }
+
   return (
     <div
       onClick={() => navigate(`${data.media_type}/${data.id}${search}`)}
-      className="flex flex-col  justify-center p-1 cursor-pointer"
+      className="flex flex-col  justify-center p-1 cursor-pointer text-white"
     >
       <div className="overflow-hidden ">
         <img

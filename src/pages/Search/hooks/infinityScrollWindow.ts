@@ -21,7 +21,6 @@ const useInfinityScroll = (data: Data) => {
         scrollHeight
       ) {
         if (data.hasNextPage && !data.isFetching) {
-          console.log("fetched");
           data.fetchNextPage();
         }
       }

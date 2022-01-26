@@ -6,7 +6,7 @@ import Carocel from "../../components/Carocel";
 import Modal from "../../components/Modal/Modal";
 import { Paths } from "../../router/types";
 import SwitchButtons from "./components/SwitchButtons";
-import { Helmet } from "react-helmet-async";
+import HelmetAsync from "../../components/HelmetAsync";
 
 const TV = () => {
   const pageState = useState(1);
@@ -17,9 +17,7 @@ const TV = () => {
 
   return (
     <>
-      <Helmet>
-        <title>TV</title>
-      </Helmet>
+      <HelmetAsync title="TV" />
       <main className="relative">
         {isLoading ? (
           <div className="flex items-center justify-center h-screen">

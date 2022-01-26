@@ -658,6 +658,11 @@ h1 {
   margin-right: 0.75rem;
 }
 
+.my-7 {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -696,6 +701,14 @@ h1 {
 
 .mt-40 {
   margin-top: 10rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .block {
