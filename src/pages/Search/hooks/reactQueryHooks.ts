@@ -2,7 +2,7 @@ import { Paths } from "./../../../router/types";
 import { SearchTarget } from "./../Search";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { search } from "../../../apis/api";
 import { Movie, MTType, TMDBData, TV } from "./../../../apis/types";
 import { checkWarning } from "../../../utilities/utility";
@@ -13,9 +13,15 @@ const getMatchData = (temp: any[], searchTarget: SearchTarget) => {
   if (temp) {
     switch (searchTarget) {
       case "movie":
-        return [movieInfinity(temp as Movie[])];
+        return [
+          movieInfinity(
+            temp.map((i) => ({ ...i, media_type: "movie" })) as Movie[]
+          ),
+        ];
       case "tv":
-        return [tvInfinity(temp as TV[])];
+        return [
+          tvInfinity(temp.map((i) => ({ ...i, media_type: "tv" })) as TV[]),
+        ];
 
       case "multi":
         const tvs: TV[] = [];
@@ -49,13 +55,12 @@ export const useGetMovieSearchResult = (
     );
 
   const temp = data?.pages[data.pages.length - 1].results;
-
   useEffect(() => {
-    if (data && temp) {
+    if (temp) {
       const contents = getMatchData(temp, searchTarget);
       contents?.forEach((item) => dispatch(item));
     }
-  }, [dispatch, data, searchTarget, temp]);
+  }, [dispatch, temp]);
 
   return { isLoading, data, hasNextPage, fetchNextPage, isFetching };
 };

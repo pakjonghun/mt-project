@@ -22,7 +22,10 @@ export const useGetMovie = (page: number = 1) => {
   );
 
   useEffect(() => {
-    data?.results?.length && dispatch(movieSave(data.results));
+    data?.results?.length &&
+      dispatch(
+        movieSave(data.results.map((i) => ({ ...i, media_type: "movie" })))
+      );
   }, [data, dispatch]);
 
   usePreFetch({

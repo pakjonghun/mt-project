@@ -29,7 +29,7 @@ const Header = () => {
     //header height-size must pt-size
     <div
       style={{ paddingBottom: "10%" }}
-      className=" min-h-screen pt-20 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black"
+      className=" pt-20 md:pt-24 md:text-lg lg:text-xl 2xl:text-2xl bg-black"
     >
       <motion.header
         style={{

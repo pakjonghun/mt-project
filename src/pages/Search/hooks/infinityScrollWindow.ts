@@ -16,8 +16,14 @@ const useInfinityScroll = (data: Data) => {
       const totalScorolled =
         document.documentElement.clientHeight + window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
-      if (totalScorolled + window.innerHeight / 2 >= scrollHeight) {
-        if (data.hasNextPage && !data.isFetching) data.fetchNextPage();
+      if (
+        totalScorolled + document.documentElement.clientHeight / 2 >=
+        scrollHeight
+      ) {
+        if (data.hasNextPage && !data.isFetching) {
+          console.log("fetched");
+          data.fetchNextPage();
+        }
       }
     };
 
@@ -32,7 +38,9 @@ const useInfinityScroll = (data: Data) => {
     };
 
     window.addEventListener("scroll", throttling);
-    return () => window.removeEventListener("scroll", throttling);
+    return () => {
+      window.removeEventListener("scroll", throttling);
+    };
   }, [data]);
 };
 

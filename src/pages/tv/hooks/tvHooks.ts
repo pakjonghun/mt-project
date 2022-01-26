@@ -23,7 +23,8 @@ export const useGetTV = (page: number = 1) => {
   );
 
   useEffect(() => {
-    data?.results?.length && dispatch(tvSave(data.results));
+    data?.results?.length &&
+      dispatch(tvSave(data.results.map((i) => ({ ...i, media_type: "tv" }))));
   }, [data, dispatch]);
 
   usePreFetch({

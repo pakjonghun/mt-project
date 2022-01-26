@@ -1,17 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TV } from "../../apis/types";
 
-const initialState: TV[] = [
-  {
-    backdrop_path: "",
-    first_air_date: "",
-    id: 1,
-    name: "",
-    original_name: "",
-    overview: "",
-    vote_average: 1,
-  },
-];
+const initialState: TV[] = [];
 
 const tvSlice = createSlice({
   name: "tv",

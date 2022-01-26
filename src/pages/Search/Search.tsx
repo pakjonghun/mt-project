@@ -3,7 +3,6 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import Modal from "../../components/Modal/Modal";
@@ -12,13 +11,8 @@ import { getCommaNumber } from "../../utilities/utility";
 import { useSearch } from "./hooks/hooks";
 import { useGetMovieSearchResult } from "./hooks/reactQueryHooks";
 import { Helmet } from "react-helmet-async";
-import { VariableSizeList as List } from "react-window";
 import useViewPortWidth from "../../hooks/useViewportWidth";
 import "react-virtualized/styles.css";
-import useInfinityScroll from "./hooks/infinityScroll";
-import { InfiniteData, useQueryClient } from "react-query";
-import { Paths } from "../../router/types";
-import { MTType, TMDBData } from "../../apis/types";
 import {
   Grid,
   WindowScroller,
@@ -29,6 +23,9 @@ import {
 import Item from "./components/Item";
 import { GridCoreProps } from "react-virtualized/dist/es/Grid";
 import { MeasuredCellParent } from "react-virtualized/dist/es/CellMeasurer";
+import { useAppSelector } from "../../hooks/reduxHooks";
+import useInfinityScroll from "./hooks/infinityScrollWindow";
+import { Movie, TV } from "../../apis/types";
 
 export type SearchTarget = "movie" | "tv" | "multi";
 
@@ -43,19 +40,27 @@ const cols = {
 
 const Search = () => {
   const [searchTareget, setSearchTarget] = useState<SearchTarget>("multi");
-  const ref = useRef<HTMLDivElement>(null);
   const term = useSearch();
   const data = useGetMovieSearchResult(term || "", 1, searchTareget);
 
-  const itemCount =
-    !data.isFetching && data?.data?.pages
-      ? +data.data.pages[data.data.pages.length - 1].results.length +
-        +(data.data.pages.length - 1) * 20
-      : 0;
+  useInfinityScroll(data);
+  const movies = useAppSelector((state) => state.movie);
+  const tvs = useAppSelector((state) => state.tv);
+  const contents = useMemo(() => {
+    switch (searchTareget) {
+      case "movie":
+        return movies;
+      case "tv":
+        return tvs;
+      case "multi":
+        return [...movies, ...tvs];
+      default:
+        throw new Error("searchTarget Error");
+    }
+  }, [movies, tvs, searchTareget]);
+  const itemCount = contents.length;
   const curWidth = useViewPortWidth();
   const colCount = cols[curWidth || 639];
-
-  useInfinityScroll(data);
 
   const onSelected = (value: SearchTarget) => setSearchTarget(value);
 
@@ -63,18 +68,15 @@ const Search = () => {
     () =>
       new CellMeasurerCache({
         fixedWidth: true,
-        minHeight: 250,
-        defaultHeight: 500,
+        minHeight: 150,
+        defaultHeight: 250,
         keyMapper: (row, col) => {
           const index = colCount * row + col;
-          const page = Math.floor(index / 20);
-          const result = index - page * 20;
-          const temp = data.data?.pages[page];
-          const curData = temp && data.data?.pages[page].results[result];
+          const curData = contents[index];
           return curData;
         },
       }),
-    [data.data?.pages, colCount]
+    [contents, colCount]
   );
 
   useEffect(() => {
@@ -89,11 +91,7 @@ const Search = () => {
     parent,
   }: CellRenderProps) {
     const index = colCount * rowIndex + columnIndex;
-    const page = Math.floor(index / 20);
-    const result = index - page * 20;
-    const temp = data.data?.pages[page];
-    const curData = temp && data.data?.pages[page].results[result];
-    const curType = curData?.media_type;
+    const curData = contents[index];
 
     return (
       <CellMeasurer
@@ -103,19 +101,14 @@ const Search = () => {
         columnIndex={columnIndex}
         rowIndex={rowIndex}
       >
-        <div className="text-black" key={key} style={style}>
+        <div key={key} style={style}>
           {curData && <Item data={curData} />}
         </div>
       </CellMeasurer>
     );
   }
 
-  const renderChild = useCallback(cellRenderer, [
-    // data.isFetching,
-    colCount,
-    data.data?.pages,
-    cache,
-  ]);
+  const renderChild = useCallback(cellRenderer, [colCount, contents, cache]);
 
   if (data.isLoading) {
     return (
@@ -126,19 +119,21 @@ const Search = () => {
   }
 
   return (
-    <main className="px-3 text-stone-300 bg-blue-300">
+    <main className="px-3 text-stone-300 ">
       <Helmet>
         <title>Search</title>
       </Helmet>
-      <div className=" max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">
         <WindowScroller>
-          {({ height, width, scrollTop, isScrolling, onChildScroll }) => (
-            <div ref={ref} className="mx-auto">
-              <div className="flex items-center justify-between mb-5">
-                <h1 className="h4 font-bold">{`${term} : Total Search Results ${getCommaNumber(
-                  data?.data?.pages[0].total_results &&
-                    +data?.data?.pages[0].total_results
+          {({ height, scrollTop, isScrolling, onChildScroll }) => (
+            <div className="mx-auto pt-10">
+              <div className="fixed top-16 flex items-center justify-between w-full max-w-screen-2xl px-10 mb-5 z-10 bg-black">
+                <h1 className=" h4 font-bold">{`${term} : Total Search Results ${getCommaNumber(
+                  contents.length &&
+                    data.data?.pages[0].total_results &&
+                    +data.data?.pages[0].total_results
                 )}`}</h1>
+
                 <select
                   className="ml-3 h-fit px-3 py-1 rounded-sm"
                   defaultValue={searchTareget}
@@ -159,10 +154,10 @@ const Search = () => {
                     onScroll={onChildScroll}
                     isScrolling={isScrolling}
                     scrollTop={scrollTop}
-                    height={height}
-                    autoHeight
-                    width={width}
                     cellRenderer={renderChild}
+                    autoHeight
+                    height={height}
+                    width={width}
                     columnCount={colCount}
                     columnWidth={width / colCount}
                     rowCount={Math.ceil(itemCount / colCount)}
