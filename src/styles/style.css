@@ -807,6 +807,10 @@ h1 {
   max-width: 24rem;
 }
 
+.max-w-screen-lg {
+  max-width: 1024px;
+}
+
 .origin-top {
   -webkit-transform-origin: top;
           transform-origin: top;

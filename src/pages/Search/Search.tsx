@@ -11,6 +11,7 @@ import useCacheMaker from "../movie/hooks/cacheMaker";
 import GridChildRender from "./components/GridChildRender";
 import Loading from "../../components/Loading";
 import InfinityScrollGrid from "./components/InfinityScrollGrid";
+import Modal from "../../components/Modal/Modal";
 
 export type SearchTarget = "movie" | "tv" | "multi";
 
@@ -51,16 +52,19 @@ const Search = () => {
   }
 
   return (
-    <InfinityScrollGrid
-      term={term}
-      searchTareget={searchTareget}
-      totalResult={data.data?.pages[0].total_results}
-      cache={cache}
-      colCount={colCount}
-      itemCount={itemCount}
-      renderChild={renderChild}
-      onSelected={onSelected}
-    />
+    <div className="mx-auto max-w-screen-2xl">
+      <InfinityScrollGrid
+        term={term}
+        searchTareget={searchTareget}
+        totalResult={data.data?.pages[0].total_results}
+        cache={cache}
+        colCount={colCount}
+        itemCount={itemCount}
+        renderChild={renderChild}
+        onSelected={onSelected}
+      />
+      <Modal />
+    </div>
   );
 };
 
