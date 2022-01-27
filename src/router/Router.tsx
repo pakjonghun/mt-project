@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
+import Error from "../pages/Error";
 import Main from "../pages/main";
 import Movie from "../pages/movie";
 import Search from "../pages/Search";
@@ -27,6 +28,7 @@ const Routers = () => {
             <Route path="detail/:id" element={<TV />} />
           </Route>
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
