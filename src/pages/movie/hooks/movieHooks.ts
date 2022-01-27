@@ -27,7 +27,6 @@ export const useGetMovie = (page: number = 1) => {
         ...i,
         media_type: "movie",
       }));
-      console.log(saveData);
       dispatch(movieSave(saveData));
     }
   }, [data, dispatch]);

@@ -1,11 +1,13 @@
+import { useAppDispatch } from "./../../../hooks/reduxHooks";
+import { useEffect } from "react";
 import { checkWarning } from "../../../utilities/utility";
 import { queryKeys } from "../../../reactQuery/constants";
 import { TMDBData, Movie, TV } from "../../../apis/types";
 import { movieApis, tvApis } from "../../../apis/api";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { useQuery } from "react-query";
 import { movieSave } from "../../../store/reducers/movie";
 import { tvSave } from "../../../store/reducers/tv";
+type SaveKey = "movie" | "tv";
 
 export const useGetMovie = () => {
   const dispatch = useAppDispatch();
@@ -16,13 +18,16 @@ export const useGetMovie = () => {
     {
       onSuccess: (data) => {
         checkWarning(data);
-        data.results?.length &&
-          dispatch(
-            movieSave(data.results.map((i) => ({ ...i, media_type: "movie" })))
-          );
       },
     }
   );
+
+  useEffect(() => {
+    data?.results?.length &&
+      dispatch(
+        movieSave(data.results.map((i) => ({ ...i, media_type: "movie" })))
+      );
+  }, [dispatch, data?.results]);
 
   return { isLoading, data };
 };
@@ -36,13 +41,14 @@ export const useGetTV = () => {
     {
       onSuccess: (data) => {
         checkWarning(data);
-        data.results?.length &&
-          dispatch(
-            tvSave(data.results.map((i) => ({ ...i, media_type: "tv" })))
-          );
       },
     }
   );
+
+  useEffect(() => {
+    data?.results?.length &&
+      dispatch(tvSave(data.results.map((i) => ({ ...i, media_type: "tv" }))));
+  }, [dispatch, data?.results]);
 
   return { isLoading, data };
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Paths } from "../../../router/types";
 import Border from "../../Border";
@@ -12,7 +12,7 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ path, title }) => {
   const isMatch = useGetMiddlePath()?.[1] === path;
-
+  const isMain = useMatch("/");
   return (
     <Link
       to={path}
@@ -20,7 +20,7 @@ const Menu: React.FC<MenuProps> = ({ path, title }) => {
     >
       {title}
       <AnimatePresence>
-        {isMatch && (
+        {!isMain && isMatch && (
           <Border
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
