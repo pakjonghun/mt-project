@@ -57,7 +57,7 @@ const Search = () => {
       <InfinityScrollGrid
         term={term}
         searchTareget={searchTareget}
-        totalResult={data.data?.pages[0].total_results}
+        totalResult={contents.length}
         cache={cache}
         colCount={colCount}
         itemCount={itemCount}
