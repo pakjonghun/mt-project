@@ -7,9 +7,11 @@ import Modal from "../../components/Modal/Modal";
 import { Paths } from "../../router/types";
 import SwitchButtons from "./components/SwitchButtons";
 import HelmetAsync from "../../components/HelmetAsync";
+import { useStoreReset } from "../../hooks/resetComponent";
 
 const TV = () => {
   const pageState = useState(1);
+  useStoreReset("tv");
   const { data, isLoading } = useGetTV(pageState[0]);
   const bannerData = data?.results[0];
 

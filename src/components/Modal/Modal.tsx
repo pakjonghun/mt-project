@@ -9,7 +9,7 @@ import ModalWrapper from "./ModalWrapper";
 const Modal = () => {
   const { item, id, path } = useFindItem();
 
-  if (!item || !id) return null;
+  if (!item || !id || !path) return null;
 
   return (
     <ModalWrapper id={id}>

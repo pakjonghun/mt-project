@@ -18,7 +18,7 @@ const useCacheMaker = ({
     () =>
       new CellMeasurerCache({
         fixedWidth: true,
-        minHeight: 150,
+        minHeight: 250,
         defaultHeight: 250,
         keyMapper: (row, col) => {
           const index = colCount * row + col;

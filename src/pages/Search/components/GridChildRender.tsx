@@ -34,6 +34,7 @@ const GridChildRender = ({
     const index = colCount * rowIndex + columnIndex;
     const curData = contents[index];
 
+    // console.log(curData.media_type);
     return (
       <CellMeasurer
         key={key}

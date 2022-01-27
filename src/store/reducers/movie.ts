@@ -12,8 +12,11 @@ const movieSlice = createSlice({
     movieInfinity: (state, { payload }: PayloadAction<Movie[]>) => {
       return [...state, ...payload];
     },
+    resetMovie: () => {
+      return [];
+    },
   },
 });
 
-export const { movieInfinity, movieSave } = movieSlice.actions;
+export const { movieInfinity, movieSave, resetMovie } = movieSlice.actions;
 export default movieSlice.reducer;

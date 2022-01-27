@@ -7,10 +7,12 @@ import Carocel from "../../components/Carocel";
 import Modal from "../../components/Modal/Modal";
 import { Paths } from "../../router/types";
 import HelmetAsync from "../../components/HelmetAsync";
+import { useStoreReset } from "../../hooks/resetComponent";
 
 const Main = () => {
   const [isMovie, setIsMovie] = React.useState(true);
 
+  useStoreReset("all");
   const { data: Mdata, isLoading: Mloading } = useGetMovie();
   const { data: Tdata, isLoading: Tloading } = useGetTV();
   const changeTvKey = Tdata?.results.map((tv) => ({ ...tv, title: tv.name }));

@@ -37,6 +37,7 @@ const Search = () => {
 
   useInfinityScroll(data);
   const onSelected = (value: SearchTarget) => setSearchTarget(value);
+  contents.forEach((i) => console.log(i.media_type));
   const renderChild = GridChildRender({
     colCount,
     contents,

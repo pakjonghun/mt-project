@@ -52,18 +52,18 @@ const InfinityScrollGrid: React.FC<InfinityScrollGridProps> = ({
             {({ width }) => (
               <Grid
                 deferredMeasurementCache={cache}
-                onScroll={onChildScroll}
                 isScrolling={isScrolling}
                 scrollTop={scrollTop}
-                cellRenderer={renderChild}
                 autoHeight
                 height={height}
                 width={width}
                 columnCount={colCount}
                 columnWidth={width / colCount}
-                rowCount={Math.ceil(itemCount / colCount)}
-                rowHeight={cache.rowHeight}
                 overscanRowCount={0}
+                rowCount={Math.ceil(itemCount / colCount)}
+                onScroll={onChildScroll}
+                cellRenderer={renderChild}
+                rowHeight={cache.rowHeight}
               />
             )}
           </AutoSizer>

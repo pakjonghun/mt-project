@@ -7,9 +7,12 @@ import Modal from "../../components/Modal/Modal";
 import { Paths } from "../../router/types";
 import SwitchButtons from "./components/SwitchButtons";
 import HelmetAsync from "../../components/HelmetAsync";
+import { useStoreReset } from "../../hooks/resetComponent";
 
 const Movie = () => {
   const pageState = useState(1);
+
+  useStoreReset("movie");
   const { data, isLoading } = useGetMovie(pageState[0]);
   const bannerData = data?.results[0];
 

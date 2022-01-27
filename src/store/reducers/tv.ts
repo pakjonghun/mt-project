@@ -11,8 +11,9 @@ const tvSlice = createSlice({
     tvInfinity: (state, { payload }: PayloadAction<TV[]>) => {
       return [...state, ...payload];
     },
+    resetTv: () => [],
   },
 });
 
-export const { tvSave, tvInfinity } = tvSlice.actions;
+export const { tvSave, tvInfinity, resetTv } = tvSlice.actions;
 export default tvSlice.reducer;
