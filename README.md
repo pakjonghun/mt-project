@@ -8,7 +8,7 @@
 
 ## 기술스택
 
-react
+react,
 react-query, redux
 tailwindcss
 
@@ -45,3 +45,58 @@ tailwindcss
   - styled-component와 같이 사용할 수도 있다고 하는데 중복되는 기능이 있어서 tailwindcss 만 적용
   - 현재는 styled 프롭스에 변경되는 이미지가 들어가 있음.
 - 화면 반응형을 두가지 방법으로 중복 적용중임(react hook 으로 화면 변환 감지, tailwindcss 의 반응형 class 이용)
+
+## 관심사항
+
+- 최적화(styled props에 넣어준 값은 꼭 useMemo 를 사용할 필요는 없다. 성능에 문제가 될때만 사용한다.)
+- react-virtualized 에서 grid 방식의 무한스크롤은 권장하고 있지는 않았다(사용예가 별로 없고, 사용간 오히려 성능이 떨어진다며 제약사항도 보였음.)
+- 그러나 grid 방식이 넓은 화면을 제대로 활용 할 수 있다고 생각해서 grid 방식으로 적용했다.
+- 그리고 리스트가 많아질 때 화면끊임이 조금 더 개선되었다.
+
+```
+<WindowScroller>
+      {({ height, scrollTop, isScrolling, onChildScroll }) => (
+        <div className="mx-auto pt-10">
+          <Header
+            term={term}
+            searchTareget={searchTareget}
+            totalResult={totalResult}
+            onSelected={onSelected}
+          />
+          <AutoSizer disableHeight>
+            {({ width }) => (
+              <Grid
+                deferredMeasurementCache={cache}
+                isScrolling={isScrolling}
+                scrollTop={scrollTop}
+                autoHeight
+                height={height}
+                width={width}
+                columnCount={colCount}
+                columnWidth={width / colCount}
+                overscanRowCount={0}
+                rowCount={Math.ceil(itemCount / colCount)}
+                onScroll={onChildScroll}
+                cellRenderer={renderChild}
+                rowHeight={cache.rowHeight}
+              />
+            )}
+          </AutoSizer>
+        </div>
+      )}
+    </WindowScroller>
+```
+
+- 캐슁은 react-query를 사용하면 좋다는 생각을 했다. infinity-scroll 기능을 별도로 제공하고 있다.
+
+```
+const { isLoading, data, hasNextPage, fetchNextPage, isFetching } =
+    useInfiniteQuery<TMDBData<MTType[]>>(
+      [Paths.search, term],
+      ({ pageParam = page }) => search(term, searchTarget, { pageParam }),
+      {
+        getNextPageParam: (last) => last.page + 1 || undefined,
+        onSuccess: (data) => checkWarning(data.pages[data.pages.length - 1]),
+      }
+    );
+```
