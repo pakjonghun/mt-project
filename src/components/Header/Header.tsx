@@ -33,7 +33,8 @@ const Header = () => {
     >
       <motion.header
         style={{
-          backgroundColor: path?.[1] === "search" ? "1" : headerController,
+          backgroundColor:
+            path?.[1].trim() === "search" ? "1" : headerController,
         }}
         className="fixed top-0 flex item-center justify-between w-full h-20 md:h-24 bg-black z-10"
       >

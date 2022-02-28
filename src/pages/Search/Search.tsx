@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { useSearch } from "./hooks/hooks";
 import { useGetMovieSearchResult } from "./hooks/reactQueryHooks";
 import useViewPortWidth from "../../hooks/useViewportWidth";
-import "react-virtualized/styles.css";
-import { Grid, WindowScroller, AutoSizer } from "react-virtualized";
 import useInfinityScroll from "./hooks/infinityScrollWindow";
-import Header from "./components/Header";
 import useGetStoreData from "../movie/hooks/getStoreData";
 import useCacheMaker from "../movie/hooks/cacheMaker";
 import GridChildRender from "./components/GridChildRender";
 import Loading from "../../components/Loading";
 import InfinityScrollGrid from "./components/InfinityScrollGrid";
 import Modal from "../../components/Modal/Modal";
+import "react-virtualized/styles.css";
 
 export type SearchTarget = "movie" | "tv" | "multi";
 

@@ -62,5 +62,5 @@ export const useGetMovieSearchResult = (
     }
   }, [dispatch, temp]);
 
-  return { isLoading, data, hasNextPage, fetchNextPage, isFetching };
+  return { isLoading, data, hasNextPage, isFetching, fetchNextPage };
 };

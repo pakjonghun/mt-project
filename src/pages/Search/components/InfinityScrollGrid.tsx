@@ -8,7 +8,7 @@ import {
   CellMeasurerCache,
 } from "react-virtualized";
 import Header from "./Header";
-import GridChildRender, { CellRenderProps } from "./GridChildRender";
+import { CellRenderProps } from "./GridChildRender";
 import { SearchTarget } from "../Search";
 
 interface InfinityScrollGridProps {

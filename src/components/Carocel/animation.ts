@@ -1,7 +1,3 @@
-type AniProps = {
-  direction: number;
-};
-
 export const animation = {
   initial: (direction: number) => ({
     x: direction > 0 ? -window.innerWidth + 56 : window.innerWidth - 56,

@@ -7,7 +7,6 @@ import { movieApis, tvApis } from "../../../apis/api";
 import { useQuery } from "react-query";
 import { movieSave } from "../../../store/reducers/movie";
 import { tvSave } from "../../../store/reducers/tv";
-type SaveKey = "movie" | "tv";
 
 export const useGetMovie = () => {
   const dispatch = useAppDispatch();

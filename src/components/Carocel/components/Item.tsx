@@ -2,7 +2,6 @@ import React from "react";
 import { getImageUrl, textCutter } from "../../../utilities/utility";
 import basic from "../../../images/empty.jpg";
 import { motion } from "framer-motion";
-import { ClassNames } from "@emotion/react";
 
 type Data = {
   title?: string;
