@@ -4,37 +4,37 @@
 
 ## Description
 
-영화와 드라마 컨텐츠 내용 쉽게 찾아볼 수 있는 프로젝트 입니다.
+영화와 드라마 컨텐츠 내용 쉽게 찾아볼 수 있는 프로젝트 입니다.</br>
 
 ## 기술스택
 
 react,
 react-query, redux
-tailwindcss
+tailwindcss</br>
 
 ## 잘만들었다고 생각하는 이유
 
 - 고민해서 기술스택을 적용함.
   - react-query : 자동으로 캐쉬화가 되어서 성능이 향상됨.
   - redux : chrome redux 디버깅 툴을 이용하여 스테이트 추적 관리가 편함.
-  - tailwindcss : 비교적 작업속도가 빠르며, 똑같지 않는 스타일링이 가능함.
+  - tailwindcss : 비교적 작업속도가 빠르며, 똑같지 않는 스타일링이 가능함.</br>
 - 문제 해결을 위해서 고민함.
   - 스크롤시 리스트가 많아지면 끊기는 문제 해결을 위해 고민.
     - 처음에는 불필요한 작업을 수행하는줄 알고 코드 구조에서 원인을 찾으려고 함
     - 구글링 결과 비슷한 문제를 해결한 경우를 검색 하여 적용
     - react-query 의 useInfinity 훅 사용(캐쉬적용)
-    - 화면에 보이지 않는 부분은 display:none 으로 처리(windowing 적용)
+    - 화면에 보이지 않는 부분은 display:none 으로 처리(windowing 적용)</br>
   - 페이지네이션을 적용할때 다음페이지 에서 로딩 화면이 발생
-    - react-query 의 preFetch 기능 활용
+    - react-query 의 preFetch 기능 활용</br>
   - iframe 태그가 로딩되는동안 화면이 끊기는 문제
-    - 일정시간동안 기본이미지가 뜨도록 함
+    - 일정시간동안 기본이미지가 뜨도록 함</br>
   - 타입 및 구문이 중복되는 문제
     - try catch 구문은 react-query 의 onError에서 공통으로 처리
     - 중복되는 타입은 interface 의 상속 기능을 사용했다가 type 의 & 를 이용해서 최소화함
-    - 공통으로 사용되는 훅을 별도로 만들어서 재사용(화면 너비 높이 측정)
+    - 공통으로 사용되는 훅을 별도로 만들어서 재사용(화면 너비 높이 측정)</br>
 - 계속 문제점을 찾아서 고쳐나감
   - 중복되는 기능, 코드 최소화
-  - 중복되는 컴포넌트 쪼개기
+  - 중복되는 컴포넌트 쪼개기</br>
 
 ## 해결해야 할 문제
 
@@ -44,7 +44,7 @@ tailwindcss
 - tailwindcss 로 div 배경화면을 다이나믹하게 부여할 수가 없었음.
   - styled-component와 같이 사용할 수도 있다고 하는데 중복되는 기능이 있어서 tailwindcss 만 적용
   - 현재는 styled 프롭스에 변경되는 이미지가 들어가 있음.
-- 화면 반응형을 두가지 방법으로 중복 적용중임(react hook 으로 화면 변환 감지, tailwindcss 의 반응형 class 이용)
+- 화면 반응형을 두가지 방법으로 중복 적용중임(react hook 으로 화면 변환 감지, tailwindcss 의 반응형 class 이용)</br>
 
 ## 관심사항
 
