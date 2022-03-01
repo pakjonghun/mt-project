@@ -1,6 +1,5 @@
 import { Movie } from "./../../apis/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import image from "../../images/empty.jpg";
 
 const initialState: Movie[] = [];
 
@@ -10,6 +9,7 @@ const movieSlice = createSlice({
   reducers: {
     movieSave: (_, { payload }: PayloadAction<Movie[]>) => payload,
     movieInfinity: (state, { payload }: PayloadAction<Movie[]>) => {
+      console.log([...state, ...payload]);
       return [...state, ...payload];
     },
     resetMovie: () => {
